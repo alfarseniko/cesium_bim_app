@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+
+# TypeScript build output
+dist/
+build/
+
+# TypeScript specific
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE or editor-specific files
+.vscode/
+.idea/
+
+# npm package lock
+package-lock.json
+yarn.lock
+
+# dotenv environment files
+.env
+.env.local
+.env.*.local
+
+# Test output
+coverage/
+
+# Misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS Finder files
+._*
+
+# Windows Installer files
+ehthumbs.db
+
+# JetBrains IDEs (IntelliJ, WebStorm, etc.)
+.idea/

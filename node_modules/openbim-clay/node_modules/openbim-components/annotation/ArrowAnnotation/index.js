@@ -1,0 +1,66 @@
+import { BaseSVGAnnotation } from "../../base-types";
+import { Button } from "../../ui";
+import { SVGArrow } from "../SVGArrow";
+export class ArrowAnnotation extends BaseSVGAnnotation {
+    constructor(components, drawManager) {
+        super();
+        this.name = "ArrowAnnotation";
+        this.canvas = null;
+        this.cancel = () => {
+            if (!this._isDrawing) {
+                return;
+            }
+            this._isDrawing = false;
+            this._previewElement.reset();
+            this._previewElement.get().remove();
+        };
+        this.start = (event) => {
+            var _a, _b, _c, _d;
+            if (!this.canDraw) {
+                return undefined;
+            }
+            if (!this._isDrawing) {
+                this._isDrawing = true;
+                this._previewElement.setStyle((_a = this.drawManager) === null || _a === void 0 ? void 0 : _a.viewport.config);
+                this._previewElement.x1 = event.clientX;
+                this._previewElement.y1 = event.clientY;
+                this._previewElement.x2 = event.clientX;
+                this._previewElement.y2 = event.clientY;
+                (_b = this.svgViewport) === null || _b === void 0 ? void 0 : _b.append(this._previewElement.get());
+            }
+            else {
+                const arrow = this._previewElement.clone();
+                arrow.setStyle((_c = this.drawManager) === null || _c === void 0 ? void 0 : _c.viewport.config);
+                (_d = this.svgViewport) === null || _d === void 0 ? void 0 : _d.append(arrow.get());
+                this.cancel();
+                return arrow;
+            }
+            return undefined;
+        };
+        this.draw = (e) => {
+            if (!this.canDraw || !this._isDrawing) {
+                return;
+            }
+            this._previewElement.x1 = e.clientX;
+            this._previewElement.y1 = e.clientY;
+        };
+        this._previewElement = new SVGArrow(components);
+        this.drawManager = drawManager;
+        this.uiElement = { main: new Button(components) };
+        this.uiElement.main.label = "Arrow";
+        this.uiElement.main.materialIcon = "north_east";
+        this.uiElement.main.onclick = () => {
+            if (this.drawManager) {
+                this.drawManager.activateTool(this);
+            }
+            else {
+                this.enabled = !this.enabled;
+            }
+        };
+    }
+    dispose() {
+        super.dispose();
+        this._previewElement.dispose();
+    }
+}
+//# sourceMappingURL=index.js.map

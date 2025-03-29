@@ -1,0 +1,31 @@
+import * as THREE from "three";
+import { DimensionData } from "./types";
+import { Components, Simple2DMarker } from "../../../core";
+export * from "./types";
+export declare class SimpleDimensionLine {
+    start: THREE.Vector3;
+    end: THREE.Vector3;
+    label: Simple2DMarker;
+    boundingBox: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[]>;
+    static scale: number;
+    static units: string;
+    private _length;
+    private readonly _components;
+    private readonly _root;
+    private readonly _endpoints;
+    private readonly _line;
+    set visible(value: boolean);
+    set endPoint(point: THREE.Vector3);
+    set startPoint(point: THREE.Vector3);
+    private get _center();
+    constructor(components: Components, data: DimensionData);
+    dispose(): Promise<void>;
+    createBoundingBox(): void;
+    toggleLabel(): void;
+    private newEndpointElement;
+    private updateLabel;
+    private createLine;
+    private newText;
+    private getTextContent;
+    private getLength;
+}

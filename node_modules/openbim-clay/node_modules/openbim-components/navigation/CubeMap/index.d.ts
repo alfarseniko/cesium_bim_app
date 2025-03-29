@@ -1,0 +1,34 @@
+import { Component, Disposable, Event, Hideable, Updateable } from "../../base-types";
+import { Components } from "../../core";
+type CubeMapPositions = "top-left" | "top-right" | "bottom-right" | "bottom-left";
+export type CubeMapFace = "front" | "top" | "bottom" | "right" | "left" | "back";
+export declare class CubeMap extends Component<HTMLDivElement> implements Updateable, Hideable, Disposable {
+    name: string;
+    enabled: boolean;
+    afterUpdate: Event<CubeMap>;
+    beforeUpdate: Event<CubeMap>;
+    offset: number;
+    private _cubeFaceClass;
+    private _cyan;
+    private _pink;
+    private _blue;
+    private _components;
+    private _cube;
+    private _cubeWrapper;
+    private _matrix;
+    private _visible;
+    private _faceOrientations;
+    get visible(): boolean;
+    set visible(value: boolean);
+    constructor(components: Components);
+    dispose(): void;
+    setSize(value?: string): void;
+    setPosition(corner: CubeMapPositions): void;
+    orientToFace(orientation: CubeMapFace): void;
+    update: () => void;
+    private get _viewerContainer();
+    private get _camera();
+    private getCameraCSSMatrix;
+    get(): HTMLDivElement;
+}
+export {};

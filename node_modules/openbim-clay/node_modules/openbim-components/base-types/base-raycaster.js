@@ -1,0 +1,8 @@
+import { Component } from "./component";
+/**
+ * A base component for other components whose main mission is to cast rays,
+ * generally to pick objects with the mouse.
+ */
+export class BaseRaycaster extends Component {
+}
+//# sourceMappingURL=base-raycaster.js.map

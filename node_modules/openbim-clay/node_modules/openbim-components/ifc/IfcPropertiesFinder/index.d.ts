@@ -1,0 +1,40 @@
+import { FragmentsGroup } from "bim-fragment";
+import { Disposable, Event, FragmentIdMap, UI } from "../../base-types";
+import { Component } from "../../base-types/component";
+import { Button, FloatingWindow } from "../../ui";
+import { Components } from "../../core/Components";
+import { QueryGroup } from "./src/types";
+import { FragmentManager } from "../../fragments";
+import { QueryBuilder } from "./src/query-builder";
+export declare class IfcPropertiesFinder extends Component<null> implements UI, Disposable {
+    name: string;
+    enabled: boolean;
+    uiElement: {
+        main: Button;
+        queryWindow: FloatingWindow;
+        query: QueryBuilder;
+    };
+    private _localStorageID;
+    private _components;
+    private _fragments;
+    private _indexedModels;
+    private _noHandleAttributes;
+    private _conditionFunctions;
+    readonly onFound: Event<FragmentIdMap>;
+    constructor(components: Components, fragmentManager: FragmentManager);
+    dispose(): void;
+    loadCached(id?: string): void;
+    deleteCache(): void;
+    private setUI;
+    private indexEntityRelations;
+    find(queryGroups?: QueryGroup[], models?: FragmentsGroup[]): FragmentIdMap;
+    private toFragmentMap;
+    private simpleQuery;
+    private getMatchingEntities;
+    private combineArrays;
+    private getCommonElements;
+    private arrayIntersection;
+    private arrayUnion;
+    private cache;
+    get(): null;
+}

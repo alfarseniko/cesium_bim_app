@@ -1,0 +1,31 @@
+import { Event } from "../../../base-types";
+/**
+ * A {@link NavigationMode} that allows 3D navigation and panning
+ * like in many 3D and CAD softwares.
+ */
+export class OrbitMode {
+    constructor(camera) {
+        this.camera = camera;
+        /** {@link NavigationMode.enabled} */
+        this.enabled = true;
+        /** {@link NavigationMode.id} */
+        this.id = "Orbit";
+        /** {@link NavigationMode.projectionChanged} */
+        this.projectionChanged = new Event();
+        this.activateOrbitControls();
+    }
+    /** {@link NavigationMode.toggle} */
+    toggle(active) {
+        this.enabled = active;
+        if (active) {
+            this.activateOrbitControls();
+        }
+    }
+    activateOrbitControls() {
+        const controls = this.camera.controls;
+        controls.minDistance = 1;
+        controls.maxDistance = 300;
+        controls.truckSpeed = 2;
+    }
+}
+//# sourceMappingURL=orbit-mode.js.map

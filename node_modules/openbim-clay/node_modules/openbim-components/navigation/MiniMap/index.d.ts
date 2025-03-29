@@ -1,0 +1,40 @@
+import * as THREE from "three";
+import { Event, Resizeable, UI, Updateable, Component, Disposable } from "../../base-types";
+import { Canvas, Button } from "../../ui";
+import { Components } from "../../core";
+export declare class MiniMap extends Component<THREE.OrthographicCamera> implements UI, Resizeable, Updateable, Disposable {
+    name: string;
+    uiElement: {
+        main: Button;
+        canvas: Canvas;
+    };
+    afterUpdate: Event<unknown>;
+    beforeUpdate: Event<unknown>;
+    frontOffset: number;
+    overrideMaterial: THREE.MeshDepthMaterial;
+    backgroundColor: THREE.Color;
+    private _enabled;
+    private _lockRotation;
+    private _components;
+    private _camera;
+    private _renderer;
+    private _plane;
+    private _size;
+    private _tempVector1;
+    private _tempVector2;
+    private _tempTarget;
+    private readonly down;
+    get lockRotation(): boolean;
+    set lockRotation(active: boolean);
+    get zoom(): number;
+    set zoom(value: number);
+    get enabled(): boolean;
+    set enabled(active: boolean);
+    constructor(components: Components);
+    dispose(): void;
+    get(): THREE.OrthographicCamera;
+    update(): void;
+    getSize(): THREE.Vector2;
+    resize(size?: THREE.Vector2): void;
+    private updatePlanes;
+}

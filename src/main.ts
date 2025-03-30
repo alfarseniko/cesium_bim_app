@@ -22,7 +22,7 @@ import { CesiumCamera } from "./cesium-camera";
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
 // @ts-ignore
-const cesiumToken = import.meta.env.CESIUM_TOKEN;
+const cesiumToken = import.meta.env.VITE_CESIUM_TOKEN;
 Ion.defaultAccessToken = cesiumToken;
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.

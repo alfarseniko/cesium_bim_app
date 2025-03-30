@@ -1,0 +1,44 @@
+:root {
+  --primary: #029ae0;
+  --primary-100: #073044;
+  --primary-200: #415a66;
+  --primary-300: #017cb3;
+  --primary-400: #50b6e6;
+  --background: #202124;
+  --background-100: #26282b;
+  --background-200: #3b3c3f;
+  --font-xs: 10px;
+  --font-sm: 12px;
+  --font-base: 14px;
+  --font-lg: 16px;
+  --font-xl: 18px;
+  --font-2xl: 20px;
+  --font-3xl: 22px;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-base);
+  text-decoration: none;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas: "sidebar viewer";
+  height: 100vh;
+  background-color: var(--background);
+  color: #fff;
+}
+
+.viewer {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.untouchable {
+  pointer-events: none;
+}

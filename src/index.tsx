@@ -6,6 +6,7 @@ import * as ReactDOM from "react-dom/client";
 import * as Router from "react-router-dom";
 import { Sidebar } from "./react-components/Sidebar";
 import { GISViewer } from "./react-components/GISViewer.tsx";
+import { MainPage } from "./react-components/MainPage.tsx";
 
 /** ################################################### */
 /*--------------------REACT---------------------------- */
@@ -38,12 +39,11 @@ appRoot.render(
     {/**  ROUTER helps in page navigation
      *    BrowserRouter for use in Web Browser */}
     <Router.BrowserRouter>
-      {/** Sidebar remains constant and doesn't change */}
-      <Sidebar />
       {/** Router initialized for page routing/rendering */}
       <Router.Routes>
         {/** Each route is a different render in itself */}
-        <Router.Route path="/" element={<GISViewer />} />
+        <Router.Route path="/" element={<MainPage />} />
+        <Router.Route path="/app" element={<GISViewer />} />
       </Router.Routes>
     </Router.BrowserRouter>
   </>

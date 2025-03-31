@@ -42,3 +42,7 @@
 .untouchable {
   pointer-events: none;
 }
+
+#landing-page {
+  background-image: url("/earth.jpg");
+}

@@ -47,27 +47,64 @@ header {
   justify-items: center;
   justify-content: space-between;
   align-items: center;
+  align-content: center;
+  height: 50px;
   width: 100vw;
 }
 
 header img {
   height: 30px;
-  margin: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .header-links {
   display: flex;
-  padding: 20px;
   justify-content: center;
   align-content: center;
 }
 .header-links ul {
-  margin: 10px;
-  font-weight: 200;
+  margin: 15px;
+}
+.header-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: larger;
+}
+#login-button {
+  background-color: #ffffffe1;
+  margin: 0px 0px 5px 0px;
+  padding: 0px 20px 0px 20px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  font-size: larger;
+  font-weight: 600;
+  border: none;
+}
+
+#login-button:hover {
+  cursor: pointer;
+  background-color: #fff;
 }
 
 .header-links ul:hover {
   cursor: pointer;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: medium;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+footer img {
+  height: 15px;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 #landing-page {
@@ -109,4 +146,32 @@ header img {
 #landing-items h2 {
   font-size: 40px;
   font-weight: 300;
+}
+
+.cta-button {
+  margin-top: 30px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #1563b6, #004094);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.247);
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
 }

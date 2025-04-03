@@ -2,6 +2,7 @@
 const win = window as any;
 win.CESIUM_BASE_URL = "/Cesium";
 
+import * as Cesium from "cesium";
 import {
   Cartesian3,
   Ion,
@@ -11,12 +12,15 @@ import {
   Viewer,
   PerspectiveFrustum,
   createOsmBuildingsAsync,
+  SceneMode,
 } from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as THREE from "three";
 import * as OBC from "openbim-components";
 import { CesiumCamera } from "../bim-compnents/cesium-camera";
 import * as React from "react";
+import { AuthError, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 export function GISViewer() {
   async function setViewer() {
@@ -119,45 +123,45 @@ export function GISViewer() {
       maxWGS84: number[];
     };
 
-    // Load IFC
+    // // Load IFC
 
-    const ifcLoader = new OBC.FragmentIfcLoader(components);
-    const file = await fetch("small.ifc");
-    const data = await file.arrayBuffer();
-    const buffer = new Uint8Array(data);
-    const model = await ifcLoader.load(buffer, "example");
-    for (const child of model.children) {
-      child.rotation.x = Math.PI / 2;
-      child.position.z += 65;
-    }
-    scene.add(model);
+    // const ifcLoader = new OBC.FragmentIfcLoader(components);
+    // const file = await fetch("/small.ifc");
+    // const data = await file.arrayBuffer();
+    // const buffer = new Uint8Array(data);
+    // const model = await ifcLoader.load(buffer, "example");
+    // for (const child of model.children) {
+    //   child.rotation.x = Math.PI / 2;
+    //   child.position.z += 65;
+    // }
+    // scene.add(model);
 
-    window.onkeydown = (event) => {
-      if (event.code === "KeyZ") {
-        for (const child of model.children) {
-          child.position.z += 10;
-        }
-      } else if (event.code === "KeyY") {
-        for (const child of model.children) {
-          child.position.y += 10;
-        }
-      } else if (event.code === "KeyX") {
-        for (const child of model.children) {
-          child.position.x += 10;
-        }
-      }
-      model.updateMatrix();
-      model.updateWorldMatrix(true, true);
-    };
+    // window.onkeydown = (event) => {
+    //   if (event.code === "KeyZ") {
+    //     for (const child of model.children) {
+    //       child.position.z += 10;
+    //     }
+    //   } else if (event.code === "KeyY") {
+    //     for (const child of model.children) {
+    //       child.position.y += 10;
+    //     }
+    //   } else if (event.code === "KeyX") {
+    //     for (const child of model.children) {
+    //       child.position.x += 10;
+    //     }
+    //   }
+    //   model.updateMatrix();
+    //   model.updateWorldMatrix(true, true);
+    // };
 
     //Assign Three.js object mesh to our object array
-    const ifcObject: Object3D = {
-      threeMesh: model,
-      minWGS84: minWGS84,
-      maxWGS84: maxWGS84,
-    };
+    // const ifcObject: Object3D = {
+    //   threeMesh: model,
+    //   minWGS84: minWGS84,
+    //   maxWGS84: maxWGS84,
+    // };
 
-    _3Dobjects.push(ifcObject);
+    // _3Dobjects.push(ifcObject);
 
     // Animate
 
@@ -264,14 +268,26 @@ export function GISViewer() {
       camera.updateProjectionMatrix();
     });
   }
-
+  const handleSignOut = async (): Promise<void> => {
+    try {
+      await signOut(auth);
+      // The redirect will happen automatically due to the useEffect above
+    } catch (error) {
+      console.error("Sign out error:", error as AuthError);
+    }
+  };
   React.useEffect(() => {
     setViewer();
   }, []);
   return (
     <div id="viewer">
-      <div id="cesiumContainer" className="viewer"></div>
-      <div id="ThreeContainer" className="untouchable viewer"></div>
+      <div id="cesiumContainer" className="viewer no-scrollbar"></div>
+      <div id="ThreeContainer" className="untouchable viewer no-scrollbar">
+        {" "}
+        <button className="signout-button cta-button" onClick={handleSignOut}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 }

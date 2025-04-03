@@ -175,3 +175,10 @@ footer img {
   transform: scale(0.95);
   box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+.signout-button {
+  color: white;
+}

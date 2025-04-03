@@ -1,6 +1,29 @@
 import * as React from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { AuthError, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
 
 export function LandingPage() {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (currentUser) {
+      navigate("/app");
+    }
+  }, [currentUser, navigate]);
+
+  const onGetStarted = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const userCredentials = await signInWithPopup(auth, provider);
+      console.log(userCredentials);
+    } catch (error) {
+      console.error("Authentication Error:", error as AuthError);
+    }
+  };
+
   return (
     <>
       <div id="landing-page">
@@ -21,7 +44,9 @@ export function LandingPage() {
         <div id="landing-items">
           <h1>GeoBIM</h1>
           <h2>Your BIM Model on the Globe</h2>
-          <button className="cta-button">Get started</button>
+          <button className="cta-button" onClick={onGetStarted}>
+            Get started
+          </button>
         </div>
         <footer>
           Made with 🧠 for the 🌍 by CREWNIX
